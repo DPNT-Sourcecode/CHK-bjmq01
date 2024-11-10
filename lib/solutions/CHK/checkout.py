@@ -12,13 +12,20 @@ class Checkout:
         }
 
     def _validate_input(self, skus: str)-> bool:
-        pass
+        return all(sku in self.items for sku in skus)
 
-    def _count_items(self, skus: str)-> int:
-        pass
+    def _count_items(self, skus: str)-> Dict[str, int]:
+        return {sku: skus.count(sku) for sku in set(skus)}
+        
 
-    def _calculate_items_total(self, skus: str, quantity: int)-> int:
-        pass
+    def _calculate_items_total(self, sku: str, quantity: int)-> int:
+        item = self.items[sku]
+        if not item.special_offer:
+            return quantity* item.price
+        special_offer = item.special_offer
+        special_deals = quantity // special_offer.quantity
+        remaining_items = quantity % special_offer.quantity
+        return (special_deals * special_offer.special_price) + (remaining_items * item.price)
 
     def checkout(self, skus: str) -> int:
         if not skus:
@@ -28,3 +35,4 @@ class Checkout:
         
         items_count = self._count_items(skus)
         total = sum(self._calculate_items_total(sku, count) for sku, count in items_count.items())
+
