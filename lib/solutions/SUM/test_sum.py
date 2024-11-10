@@ -30,10 +30,10 @@ class TestSum(unittest.TestCase):
             (50, -1),
             (50, 101),
             (101, 101),
-            (-1, -1),
+            (-1, -1)
         ]
         for param1, param2 in invalid_ranges:
-            with self.subTest(param1, param2):
+            with self.subTest(param1=param1, param2=param2):
                 with self.assertRaises(ValueError):
                     sum_solution.compute(param1, param2)
 
