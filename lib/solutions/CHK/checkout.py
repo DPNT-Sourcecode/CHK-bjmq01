@@ -1,5 +1,5 @@
 from typing import Dict
-from models import Item, SpecialOffer
+from .models import Item, SpecialOffer
 
 class Checkout:
 
