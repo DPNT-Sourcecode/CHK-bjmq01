@@ -1,4 +1,4 @@
-from solutions.SUM import sum_solution
+import sum_solution
 import unittest
 
 
@@ -28,4 +28,3 @@ class TestSum(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
