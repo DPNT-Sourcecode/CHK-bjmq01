@@ -18,5 +18,12 @@ class TestSum(unittest.TestCase):
              ([], 1)
          ]
          for param1, param2 in invalid_inputs:
-             with self.subTest(a=a, b=)
+             with self.subTest(param1=param1, param2=param2):
+                 with self.assertRaises(ValueError):
+                     sum_solution.compute(param1, param2)
+
+
+
+if __name__ == '__main__':
+    unittest.main()
 
