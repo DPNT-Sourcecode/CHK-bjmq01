@@ -22,6 +22,21 @@ class TestSum(unittest.TestCase):
                  with self.assertRaises(ValueError):
                      sum_solution.compute(param1, param2)
 
+    def test_out_of_range(self):
+        """Check for out of range constraints"""
+        invalid_ranges = [
+            (-1, 50),
+            (101, 50),
+            (50, -1),
+            (50, 101),
+            (101, 101),
+            (-1, -1),
+        ]
+        for param1, param2 in invalid_ranges:
+            with self.subTest(param1, param2):
+                with self.assertRaises(ValueError):
+                    sum_solution.compute(param1, param2)
+
 
 
 
