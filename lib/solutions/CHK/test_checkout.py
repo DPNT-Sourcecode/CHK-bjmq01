@@ -40,7 +40,7 @@ class TestCheckout(unittest.TestCase):
 
 
     def test_order_independence(self):
-        self.assertEqual(checkout_solution.checkout("ABCD"), self.assertEqual(checkout_solution.checkout("DCBA"), 0))
+        self.assertEqual(checkout_solution.checkout("ABCD"),checkout_solution.checkout("DCBA"))
 
 
 

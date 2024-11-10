@@ -35,4 +35,4 @@ class Checkout:
         
         items_count = self._count_items(skus)
         total = sum(self._calculate_items_total(sku, count) for sku, count in items_count.items())
-
+        return total
