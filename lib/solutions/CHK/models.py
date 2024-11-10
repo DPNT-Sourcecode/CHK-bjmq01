@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional, Dict, Tuple
+from typing import Optional
 
 @dataclass
 class SpecialOffer:

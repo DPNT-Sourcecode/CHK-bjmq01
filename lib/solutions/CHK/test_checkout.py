@@ -13,9 +13,9 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout(""), 0)
 
     def test_invalid_inout(self):
-        self.assertEqual(checkout_solution.checkout("X"), 0)
-        self.assertEqual(checkout_solution.checkout("1"), 0)
-        self.assertEqual(checkout_solution.checkout("-"), 0)
+        self.assertEqual(checkout_solution.checkout("X"), -1)
+        self.assertEqual(checkout_solution.checkout("1"), -1)
+        self.assertEqual(checkout_solution.checkout("-"), -1)
 
     def test_single_items(self):
         self.assertEqual(checkout_solution.checkout("A"), 50)
