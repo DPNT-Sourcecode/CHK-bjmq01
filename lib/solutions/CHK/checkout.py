@@ -5,10 +5,11 @@ class Checkout:
 
     def __init__(self):
         self.items: Dict[str, Item] = {
-            'A': Item('A', 50, SpecialOffer(3, 130)),
+            'A': Item('A', 50, [SpecialOffer(3, 130), SpecialOffer(5, 200)]),
             'B': Item('B', 30, SpecialOffer(2, 45)),
             'C': Item('C', 20),
-            'D': Item('D', 15)
+            'D': Item('D', 15),
+            'E': Item('E', 40, [SpecialOffer(2, 80, 'B')])
         }
 
     def _validate_input(self, skus: str)-> bool:
@@ -36,3 +37,4 @@ class Checkout:
         items_count = self._count_items(skus)
         total = sum(self._calculate_items_total(sku, count) for sku, count in items_count.items())
         return total
+
