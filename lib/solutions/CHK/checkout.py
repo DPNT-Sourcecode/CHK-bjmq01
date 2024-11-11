@@ -14,18 +14,18 @@ class Checkout:
             'H': Item('H', 10, [SpecialOffer(5, 45), SpecialOffer(10, 80)]),
             'I': Item('I', 35),
             'G': Item('J', 60),
-            'K': Item('K', 80),
+            'K': Item('K', 80, [SpecialOffer(2, 150),]),
             'L': Item('L', 90),
             'M': Item('M', 15),
-            'N': Item('N', 40),
+            'N': Item('N', 40, [SpecialOffer(2, 80, 'N', 2),]),
             'O': Item('O', 10),
-            'P': Item('P', 50),
-            'Q': Item('Q', 30),
-            'R': Item('R', 50),
+            'P': Item('P', 50, [SpecialOffer(5, 200),]),
+            'Q': Item('Q', 30, [SpecialOffer(3, 80),]),
+            'R': Item('R', 50, [SpecialOffer(3, 150, 'Q'),]),
             'S': Item('S', 30),
             'T': Item('T', 20),
-            'U': Item('U', 40),
-            'V': Item('V', 50),
+            'U': Item('U', 40, [SpecialOffer(3, 120, 'U', 3),]),
+            'V': Item('V', 50, [SpecialOffer(2, 90), SpecialOffer(3, 130),]),
             'W': Item('W', 20),
             'X': Item('X', 90),
             'Y': Item('Y', 10),
@@ -102,5 +102,6 @@ class Checkout:
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
+
 
 
