@@ -33,6 +33,10 @@ class Checkout:
             'Z': Item('z', 50),
 
         }
+        self.offer_group = {
+            "total_count": 3,
+            "group": ["STXYZ"]
+        }
 
     def _validate_input(self, skus: str)-> bool:
         return all(sku in self.items for sku in skus)
