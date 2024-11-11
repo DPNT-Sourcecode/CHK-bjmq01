@@ -1,5 +1,5 @@
 from typing import Dict
-from .models import Item, SpecialOffer
+from models import Item, SpecialOffer
 
 class Checkout:
 
@@ -9,7 +9,8 @@ class Checkout:
             'B': Item('B', 30, [SpecialOffer(2, 45),]),
             'C': Item('C', 20),
             'D': Item('D', 15),
-            'E': Item('E', 40, [SpecialOffer(2, 80, 'B'),])
+            'E': Item('E', 40, [SpecialOffer(2, 80, 'B'),]),
+            'F': Item('E', 10, [SpecialOffer(2, 80, 'B'),])
         }
 
     def _validate_input(self, skus: str)-> bool:

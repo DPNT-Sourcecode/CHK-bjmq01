@@ -4,8 +4,9 @@ from typing import Optional, List
 @dataclass
 class SpecialOffer:
     quantity: int
-    special_price: int
+    special_price: int = 0 # mean free item offer
     free_item: Optional[str] = None
+    free_quantity: int = 1
 
 @dataclass
 class Item:
