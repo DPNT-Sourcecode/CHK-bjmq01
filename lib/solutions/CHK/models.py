@@ -17,5 +17,3 @@ class Item:
     def __post__init__(self):
         if self.special_offers is None:
             self.special_offers = []
-
-
