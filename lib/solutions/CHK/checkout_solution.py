@@ -9,9 +9,10 @@ def checkout(skus: str)-> int:
     return checkout_obj.checkout(skus=skus)
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
     # checkout("EEB")
     # checkout("AAAAAAAA")
-    checkout("FFFF")
+    # checkout("NNNM")
+
 
