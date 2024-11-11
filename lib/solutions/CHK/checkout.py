@@ -1,5 +1,5 @@
 from typing import Dict
-from .models import Item, SpecialOffer
+from models import Item, SpecialOffer
 
 class Checkout:
 
@@ -10,7 +10,7 @@ class Checkout:
             'C': Item('C', 20),
             'D': Item('D', 15),
             'E': Item('E', 40, [SpecialOffer(2, 80, 'B'),]),
-            'F': Item('F', 10, [SpecialOffer(2, 80, 'F'),])
+            'F': Item('F', 10, [SpecialOffer(2, 80, 'F', 2),])
         }
 
     def _validate_input(self, skus: str)-> bool:
@@ -26,11 +26,12 @@ class Checkout:
 
             for offer in item.special_offers or []:
                 if offer.free_item:
-                    free_count = count // offer.quantity
-                    if offer.free_item in free_items:
-                        free_items[offer.free_item] = max(free_items[offer.free_item], free_count)
-                    else:
-                        free_items[offer.free_item] = free_count
+                    if offer.enforced_free_item_count > count:
+                        free_count = count // offer.quantity
+                        if offer.free_item in free_items:
+                            free_items[offer.free_item] = max(free_items[offer.free_item], free_count)
+                        else:
+                            free_items[offer.free_item] = free_count
         return free_items
         
 
@@ -78,6 +79,7 @@ class Checkout:
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
+
 
 
 
