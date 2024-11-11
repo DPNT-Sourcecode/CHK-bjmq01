@@ -6,6 +6,7 @@ class SpecialOffer:
     quantity: int
     special_price: int
     free_item: Optional[str] = None
+    enforced_free_item_count: int = 0
 
 @dataclass
 class Item:
@@ -16,4 +17,5 @@ class Item:
     def __post__init__(self):
         if self.special_offers is None:
             self.special_offers = []
+
 
