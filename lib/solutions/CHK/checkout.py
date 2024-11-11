@@ -35,7 +35,7 @@ class Checkout:
         }
         self.offer_group = {
             "total_count": 3,
-            "group": ["STXYZ"]
+            "group": "STXYZ"
         }
 
     def _validate_input(self, skus: str)-> bool:
@@ -99,13 +99,32 @@ class Checkout:
         print(free_items)
         print(items_count)
 
+        total = 0
+
         for sku, free_count in free_items.items():
             if sku in items_count:
                 items_count[sku] = max(0, items_count[sku] - free_count)
         
         print("after", items_count)
+        total_group_offer_count = 0
+        total = 0
+        for sku, count in items_count.items():
+            if sku in self.offer_group['group']:
+                total_group_offer_count += count
 
+        for sku, count in items_count.items():
+            if sku in self.offer_group['group']:
+                if total_group_offer_count - count > 2:
+                    total_group_offer_count -= count
+                    
+                    items_count[sku] = 0
+                else:
+                    items_count[sku] = total_group_offer_count % 3
+        total += 45 * total_group_offer_count // 3
 
-        total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
+        print(items_count, 'group offer')
+        
+
+        total += sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
