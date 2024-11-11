@@ -1,5 +1,5 @@
 from typing import Dict
-from .models import Item, SpecialOffer
+from models import Item, SpecialOffer
 
 class Checkout:
 
@@ -106,36 +106,33 @@ class Checkout:
                 items_count[sku] = max(0, items_count[sku] - free_count)
         
         print("after", items_count)
-        total_group_offer_count = sum(
-        count for sku, count in items_count.items() 
+        group_items = [
+        (sku, count, self.items[sku].price)
+        for sku, count in items_count.items()
         if sku in self.offer_group['group']
-    )
-    
-        # Calculate number of complete groups (sets of 3)
+        ]
+        
+        group_items.sort(key=lambda x: x[2], reverse=True)
+        
+        total_group_offer_count = sum(count for _, count, _ in group_items)
         complete_groups = total_group_offer_count // 3
         remaining_items = total_group_offer_count % 3
         
-        # Calculate total price for complete groups
         total = complete_groups * 45
         
-        # Distribute remaining items back to original SKUs
-        # We keep track of remaining items to distribute
-        items_to_distribute = remaining_items
-        
-        # Update the items_count dictionary
         for sku in items_count:
             if sku in self.offer_group['group']:
-                if items_to_distribute > 0:
-                    # Assign one remaining item to this SKU
-                    items_count[sku] = 1
-                    items_to_distribute -= 1
-                else:
-                    # No remaining items to distribute
-                    items_count[sku] = 0
-
-            print(items_count, 'group offer')
+                items_count[sku] = 0
+        
+        remaining_to_distribute = remaining_items
+        for sku, original_count, _ in reversed(group_items):
+            if remaining_to_distribute > 0:
+                items_to_assign = min(remaining_to_distribute, original_count)
+                items_count[sku] = items_to_assign
+                remaining_to_distribute -= items_to_assign
         
 
         total += sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
+
