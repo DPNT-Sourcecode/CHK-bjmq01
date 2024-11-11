@@ -9,8 +9,8 @@ class Checkout:
             'B': Item('B', 30, [SpecialOffer(2, 45),]),
             'C': Item('C', 20),
             'D': Item('D', 15),
-            'E': Item('E', 40, [SpecialOffer(2, special_price=80, free_item='B'),]),
-            'F': Item('F', 10, [SpecialOffer(2, free_item='F'),])
+            'E': Item('E', 40, [SpecialOffer(2, 80, 'B'),]),
+            'F': Item('F', 10, [SpecialOffer(2, 80, 'F'),])
         }
 
     def _validate_input(self, skus: str)-> bool:
@@ -78,4 +78,5 @@ class Checkout:
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
+
 
