@@ -1,5 +1,5 @@
 from typing import Dict
-from models import Item, SpecialOffer
+from .models import Item, SpecialOffer
 
 class Checkout:
 
@@ -28,7 +28,7 @@ class Checkout:
                 if offer.free_item:
                     if offer.enforced_free_item_count==0 or count > offer.enforced_free_item_count:
                         if offer.enforced_free_item_count:
-                            free_count = count // offer.enforced_free_item_count + 1
+                            free_count = count // (offer.enforced_free_item_count + 1)
                         else:
                             free_count = count // offer.quantity
                         if offer.free_item in free_items:
