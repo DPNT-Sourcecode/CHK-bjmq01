@@ -1,5 +1,5 @@
 from typing import Dict
-from .models import Item, SpecialOffer
+from models import Item, SpecialOffer
 
 class Checkout:
 
@@ -48,7 +48,8 @@ class Checkout:
             return -1
         
         items_count = self._count_items(skus)
-        total = sum(self._calculate_items_total(sku, count) for sku, count in items_count.items())
+        total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         return total
+
 
 
