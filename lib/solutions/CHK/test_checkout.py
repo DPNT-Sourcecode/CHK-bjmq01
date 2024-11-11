@@ -44,9 +44,20 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout("EEBB"), 110)
         self.assertEqual(checkout_solution.checkout("EEEE"), 160)
 
+    def test_multiple_a_offers(self):
+        self.assertEqual(checkout_solution.checkout("AAAAA"), 200)
+        self.assertEqual(checkout_solution.checkout("AAAAAA"), 250)
+        self.assertEqual(checkout_solution.checkout("AAAAAAA"), 300)
+        self.assertEqual(checkout_solution.checkout("AAAAAAAA"), 330)
+
     def test_combined_offers(self):
         self.assertEqual(checkout_solution.checkout("AAABB"), 175)
         self.assertEqual(checkout_solution.checkout("AAABBCD"), 210)
+
+
+    def test_combined_comples_offers(self):
+        self.assertEqual(checkout_solution.checkout("EEBAAAA"), 210)
+        self.assertEqual(checkout_solution.checkout("EEBAAAAAA"), 330)
 
 
     def test_order_independence(self):
@@ -57,4 +68,3 @@ class TestCheckout(unittest.TestCase):
         
 if __name__ == '__main__':
     unittest.main()
-
