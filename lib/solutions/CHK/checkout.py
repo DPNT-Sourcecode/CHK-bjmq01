@@ -11,7 +11,7 @@ class Checkout:
             'D': Item('D', 15),
             'E': Item('E', 40, [SpecialOffer(2, 80, 'B'),]),
             'F': Item('F', 10, [SpecialOffer(2, 80, 'F', 2),]),
-            'H': Item('H', 10),
+            'H': Item('H', 10, [SpecialOffer(5, 45), SpecialOffer(10, 80)]),
             'I': Item('I', 35),
             'G': Item('J', 60),
             'K': Item('K', 80),
@@ -102,4 +102,5 @@ class Checkout:
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
+
 
