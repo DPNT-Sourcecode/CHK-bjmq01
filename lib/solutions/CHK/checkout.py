@@ -36,6 +36,9 @@ class Checkout:
         item = self.items[sku]
         if not item.special_offer:
             return quantity* item.price
+        regular_price = quantity* item.price
+        
+
         special_offer = item.special_offer
         special_deals = quantity // special_offer.quantity
         remaining_items = quantity % special_offer.quantity
