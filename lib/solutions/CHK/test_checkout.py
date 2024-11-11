@@ -49,6 +49,7 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout("AAAAAA"), 250)
         self.assertEqual(checkout_solution.checkout("AAAAAAA"), 300)
         self.assertEqual(checkout_solution.checkout("AAAAAAAA"), 330)
+        self.assertEqual(checkout_solution.checkout("AAAAAAAAA"), 390)
 
     def test_combined_offers(self):
         self.assertEqual(checkout_solution.checkout("AAABB"), 175)
@@ -58,6 +59,7 @@ class TestCheckout(unittest.TestCase):
     def test_combined_comples_offers(self):
         self.assertEqual(checkout_solution.checkout("EEBAAAA"), 210)
         self.assertEqual(checkout_solution.checkout("EEBAAAAAA"), 330)
+        self.assertCountEqual(checkout_solution.checkout("EEB"), 110)
 
 
     def test_order_independence(self):

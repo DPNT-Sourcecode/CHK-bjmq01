@@ -20,22 +20,17 @@ class Checkout:
     
     def _calculate_free_items(self, item_counts: Dict[str, int])-> Dict[str, int]:
         free_items = {}
-        e_count = item_counts.get('E', 0)
-        if e_count >= 2:
-            free_b_count = e_count // 2
-            free_items['B'] = free_b_count
-        return free_items
-        # for sku, count in item_counts.items():
-        #     item = self.items[sku]
+        for sku, count in item_counts.items():
+            item = self.items[sku]
 
-        #     for offer in item.special_offers or []:
-        #         if offer.free_item:
-        #             free_count = count // offer.quantity
-        #             if offer.free_item in free_items:
-        #                 free_items[offer.free_item] = max(free_items[offer.free_item], free_count)
-        #             else:
-        #                 free_items[offer.free_item] = free_count
-        # return free_items
+            for offer in item.special_offers or []:
+                if offer.free_item:
+                    free_count = count // offer.quantity
+                    if offer.free_item in free_items:
+                        free_items[offer.free_item] = max(free_items[offer.free_item], free_count)
+                    else:
+                        free_items[offer.free_item] = free_count
+        return free_items
         
 
     def _calculate_item_total(self, sku: str, quantity: int)-> int:
@@ -67,6 +62,7 @@ class Checkout:
         
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         return total
+
 
 
 
