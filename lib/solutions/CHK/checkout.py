@@ -37,19 +37,27 @@ class Checkout:
         if not item.special_offer:
             return quantity* item.price
         regular_price = quantity* item.price
-        
 
-        special_offer = item.special_offer
-        special_deals = quantity // special_offer.quantity
-        remaining_items = quantity % special_offer.quantity
-        return (special_deals * special_offer.special_price) + (remaining_items * item.price)
+        best_price = regular_price
+
+        for offer in item.special_offers:
+            if not offer.special_item:
+                special_deals = quantity // offer.quantity
+                remaining_items = quantity % offer.quantity
+                current_price = (special_deals * offer.special_price) + (remaining_items * item.price)
+                best_price = min(best_price, current_price)
+
+        return best_price
 
     def checkout(self, skus: str) -> int:
         if not skus:
             return 0
         if not self._validate_input(skus):
             return -1
+        items_count = self._count_items(skus=skus)
+
+        free_items = self._calculate_free_items(item_counts=items_count)
         
-        items_count = self._count_items(skus)
+        
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         return total
