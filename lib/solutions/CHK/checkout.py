@@ -10,7 +10,27 @@ class Checkout:
             'C': Item('C', 20),
             'D': Item('D', 15),
             'E': Item('E', 40, [SpecialOffer(2, 80, 'B'),]),
-            'F': Item('F', 10, [SpecialOffer(2, 80, 'F', 2),])
+            'F': Item('F', 10, [SpecialOffer(2, 80, 'F', 2),]),
+            'H': Item('H', 10),
+            'I': Item('I', 35),
+            'G': Item('J', 60),
+            'K': Item('K', 80),
+            'L': Item('L', 90),
+            'M': Item('M', 15),
+            'N': Item('N', 40),
+            'O': Item('O', 10),
+            'P': Item('P', 50),
+            'Q': Item('Q', 30),
+            'R': Item('R', 50),
+            'S': Item('S', 30),
+            'T': Item('T', 20),
+            'U': Item('U', 40),
+            'V': Item('V', 50),
+            'W': Item('W', 20),
+            'X': Item('X', 90),
+            'Y': Item('Y', 10),
+            'Z': Item('z', 50),
+
         }
 
     def _validate_input(self, skus: str)-> bool:
@@ -82,3 +102,4 @@ class Checkout:
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
+
