@@ -39,7 +39,7 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout("AAAAAA"), 260)
         
     def test_e_special_offers(self):
-        self.assertEqual(checkout_solution.checkout("EEB"), 110)
+        self.assertEqual(checkout_solution.checkout("EEB"), 80)
         self.assertEqual(checkout_solution.checkout("EE"), 80)
         self.assertEqual(checkout_solution.checkout("EEBB"), 110)
         self.assertEqual(checkout_solution.checkout("EEEE"), 160)
