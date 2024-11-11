@@ -1,5 +1,5 @@
 from typing import Dict
-from models import Item, SpecialOffer
+from .models import Item, SpecialOffer
 
 class Checkout:
 
@@ -26,7 +26,7 @@ class Checkout:
 
             for offer in item.special_offers or []:
                 if offer.free_item:
-                    if offer.enforced_free_item_count > count:
+                    if offer.enforced_free_item_count==0 or count > offer.enforced_free_item_count:
                         free_count = count // offer.quantity
                         if offer.free_item in free_items:
                             free_items[offer.free_item] = max(free_items[offer.free_item], free_count)
@@ -79,6 +79,7 @@ class Checkout:
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
+
 
 
 
