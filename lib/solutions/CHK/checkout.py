@@ -61,8 +61,9 @@ class Checkout:
 
         for sku, free_count in free_items.items():
             if sku in items_count:
-                items_count[sku] = max(0, items_count[sku - free_count])
+                items_count[sku] = max(0, items_count[sku] - free_count)
         
         
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         return total
+
