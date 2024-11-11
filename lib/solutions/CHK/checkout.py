@@ -5,7 +5,7 @@ class Checkout:
 
     def __init__(self):
         self.items: Dict[str, Item] = {
-            'A': Item('A', 50, [SpecialOffer(3, 130), SpecialOffer(5, 200)]),
+            'A': Item('A', 50, [SpecialOffer(5, 200), SpecialOffer(3, 130)]),
             'B': Item('B', 30, [SpecialOffer(2, 45),]),
             'C': Item('C', 20),
             'D': Item('D', 15),
@@ -22,14 +22,14 @@ class Checkout:
         free_items = {}
         for sku, count in item_counts.items():
             item = self.items[sku]
-            if item.special_offers:
-                for offer in item.special_offers or []:
-                    if offer.free_item:
-                        free_count = count // offer.quantity
-                        if offer.free_item in free_items:
-                            free_items[offer.free_item] = max(free_items[offer.free_item], free_count)
-                        else:
-                            free_items[offer.free_item] = free_count
+
+            for offer in item.special_offers or []:
+                if offer.free_item:
+                    free_count = count // offer.quantity
+                    if offer.free_item in free_items:
+                        free_items[offer.free_item] = max(free_items[offer.free_item], free_count)
+                    else:
+                        free_items[offer.free_item] = free_count
         return free_items
         
 
@@ -62,6 +62,7 @@ class Checkout:
         
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         return total
+
 
 
 
