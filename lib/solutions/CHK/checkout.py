@@ -15,7 +15,7 @@ class Checkout:
             'H': Item('H', 10, [SpecialOffer(5, 45), SpecialOffer(10, 80)]),
             'I': Item('I', 35),
             'J': Item('J', 60),
-            'K': Item('K', 80, [SpecialOffer(2, 150),]),
+            'K': Item('K', 70, [SpecialOffer(2, 150),]),
             'L': Item('L', 90),
             'M': Item('M', 15),
             'N': Item('N', 40, [SpecialOffer(3, 120, 'M'),]),
@@ -23,14 +23,14 @@ class Checkout:
             'P': Item('P', 50, [SpecialOffer(5, 200),]),
             'Q': Item('Q', 30, [SpecialOffer(3, 80),]),
             'R': Item('R', 50, [SpecialOffer(3, 150, 'Q'),]),
-            'S': Item('S', 30),
+            'S': Item('S', 20),
             'T': Item('T', 20),
             'U': Item('U', 40, [SpecialOffer(3, 120, 'U', 3),]),
             'V': Item('V', 50, [SpecialOffer(2, 90), SpecialOffer(3, 130),]),
             'W': Item('W', 20),
-            'X': Item('X', 90),
-            'Y': Item('Y', 10),
-            'Z': Item('z', 50),
+            'X': Item('X', 17),
+            'Y': Item('Y', 20),
+            'Z': Item('z', 21),
 
         }
         self.offer_group = {
@@ -104,6 +104,8 @@ class Checkout:
                 items_count[sku] = max(0, items_count[sku] - free_count)
         
         print("after", items_count)
+
+
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
