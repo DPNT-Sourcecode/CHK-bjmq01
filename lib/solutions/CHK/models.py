@@ -11,7 +11,7 @@ class SpecialOffer:
 class Item:
     sku: str
     price: int
-    special_offer: List[SpecialOffer] = None
+    special_offers: List[SpecialOffer] = None
 
     def __post__init__(self):
         if self.special_offers is None:

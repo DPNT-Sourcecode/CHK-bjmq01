@@ -34,14 +34,14 @@ class Checkout:
 
     def _calculate_item_total(self, sku: str, quantity: int)-> int:
         item = self.items[sku]
-        if not item.special_offer:
+        if not item.special_offers:
             return quantity* item.price
         regular_price = quantity* item.price
 
         best_price = regular_price
 
         for offer in item.special_offers:
-            if not offer.special_item:
+            if not offer.free_item:
                 special_deals = quantity // offer.quantity
                 remaining_items = quantity % offer.quantity
                 current_price = (special_deals * offer.special_price) + (remaining_items * item.price)
@@ -52,7 +52,7 @@ class Checkout:
     def checkout(self, skus: str) -> int:
         if not skus:
             return 0
-        if not self._validate_input(skus):
+        if not self._validate_input(skus=skus):
             return -1
         items_count = self._count_items(skus=skus)
 
@@ -61,3 +61,4 @@ class Checkout:
         
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         return total
+
