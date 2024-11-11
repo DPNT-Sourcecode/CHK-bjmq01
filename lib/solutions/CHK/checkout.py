@@ -20,7 +20,7 @@ class Checkout:
     
     def _calculate_free_items(self, item_counts: Dict[str, int])-> Dict[str, int]:
         free_items = {}
-        e_count = item.counts.get('E', 0)
+        e_count = item_counts.get('E', 0)
         if e_count >= 2:
             free_b_count = e_count // 2
             free_items['B'] = free_b_count
@@ -67,6 +67,7 @@ class Checkout:
         
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         return total
+
 
 
 
