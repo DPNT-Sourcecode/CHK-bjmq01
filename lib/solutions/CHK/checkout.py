@@ -1,5 +1,5 @@
 from typing import Dict
-from models import Item, SpecialOffer
+from .models import Item, SpecialOffer
 
 class Checkout:
 
@@ -106,23 +106,34 @@ class Checkout:
                 items_count[sku] = max(0, items_count[sku] - free_count)
         
         print("after", items_count)
-        total_group_offer_count = 0
-        total = 0
-        for sku, count in items_count.items():
+        total_group_offer_count = sum(
+        count for sku, count in items_count.items() 
+        if sku in self.offer_group['group']
+    )
+    
+        # Calculate number of complete groups (sets of 3)
+        complete_groups = total_group_offer_count // 3
+        remaining_items = total_group_offer_count % 3
+        
+        # Calculate total price for complete groups
+        total = complete_groups * 45
+        
+        # Distribute remaining items back to original SKUs
+        # We keep track of remaining items to distribute
+        items_to_distribute = remaining_items
+        
+        # Update the items_count dictionary
+        for sku in items_count:
             if sku in self.offer_group['group']:
-                total_group_offer_count += count
-
-        for sku, count in items_count.items():
-            if sku in self.offer_group['group']:
-                if total_group_offer_count - count > 2:
-                    total_group_offer_count -= count
-                    
-                    items_count[sku] = 0
+                if items_to_distribute > 0:
+                    # Assign one remaining item to this SKU
+                    items_count[sku] = 1
+                    items_to_distribute -= 1
                 else:
-                    items_count[sku] = total_group_offer_count % 3
-        total += 45 * total_group_offer_count // 3
+                    # No remaining items to distribute
+                    items_count[sku] = 0
 
-        print(items_count, 'group offer')
+            print(items_count, 'group offer')
         
 
         total += sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
