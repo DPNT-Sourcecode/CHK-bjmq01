@@ -103,9 +103,3 @@ class Checkout:
         total = sum(self._calculate_item_total(sku, count) for sku, count in items_count.items())
         print("total", total)
         return total
-
-
-
-
-
-

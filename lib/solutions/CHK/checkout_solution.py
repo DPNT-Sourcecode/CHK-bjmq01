@@ -14,5 +14,3 @@ def checkout(skus: str)-> int:
     # checkout("EEB")
     # checkout("AAAAAAAA")
     # checkout("NNNM")
-
-
